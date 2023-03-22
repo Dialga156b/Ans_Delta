@@ -1,0 +1,51 @@
+function DetectAnswer() {
+  let loadingScreen = document.getElementById("loading-screen");
+
+  if (loadingScreen) {
+    setTimeout(waitAndScrape, 500);
+  } else {
+    let strings = document.getElementsByTagName("body")[0].innerText
+      .split("\n")
+      .filter((s) => s.trim() !== "");
+
+    alert("Found Question. Beware Summit-Delta Has trouble With fractions.");
+    console.log(strings);
+
+    let filteredStrings = strings.slice(21, 23);
+    let combinedString = filteredStrings.join(" ");
+
+    alert(combinedString);
+    console.log(combinedString);
+
+    ReEnterQuestion(combinedString);
+  }
+}
+
+DetectAnswer();
+
+function ReEnterQuestion(equation) {
+  let text;
+  if (confirm("Would you like to Edit this Equation?")) {
+    text = prompt("Insert Edited Equation:", equation);
+    alert("Answer: 0");
+
+    var url = `https://www.symbolab.com/solver/step-by-step/${text}`;
+    var newWindow = window.open(url);
+
+    var intervalId = setInterval(function() {
+      if (newWindow.document.readyState === "complete") {
+        clearInterval(intervalId);
+
+        let strings2 = document.getElementsByTagName("body")[0].innerText
+      .split("\n")
+      .filter((s) => s.trim() !== "");
+
+        console.log(strings2);
+      }
+    }, 100);
+
+  } else {
+    alert("Answer: 0");
+  }
+  return text;
+}
