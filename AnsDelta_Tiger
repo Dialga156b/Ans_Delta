@@ -29,7 +29,7 @@ function ReEnterQuestion(equation) {
     text = prompt("Insert Edited Equation:", equation);
     alert("Answer: 0");
 
-    var url = `https://www.symbolab.com/solver/step-by-step/${text}`;
+    var url = `https://www.tiger-algebra.com/en/solution/ ${text}`;
     var newWindow = window.open(url);
 
     var intervalId = setInterval(function() {
